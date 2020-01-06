@@ -1,5 +1,5 @@
 # Nagios
-Monitoring Script for Dell Warranty, pulls Service Tag (STag) using SNMP:
+Monitoring Script for Dell Warranty; pulls Service Tag (STag) using SNMP:
 1. From server OS and the iDRAC automatically as a backup (in case SNMP under the OS doesn't work);
 2. From Chassis;
 3. From Switch;
