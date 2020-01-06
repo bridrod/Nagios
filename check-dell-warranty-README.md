@@ -45,6 +45,26 @@ client_secret='yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy'
 
 ## Usage
     ./check-dell-warranty.sh -H|--hostname HOSTNAME -w|--warning <number of days> -c|--critical <number of days> -T|--type <server|chassis|switch> -C|--community 'SNMP_COMMUNITY_STRING'
+    
+Usage:
+
+check-dell-warranty.sh [options]
+
+-H|--hostname HOSTNAME to pull SNMP 
+
+-w|--warning <number of days>
+	
+-c|--critical <number of days>
+	
+-T|--type <server|chassis|switch>
+
+-C|--community 'SNMP_COMMUNITY_STRING'
+
+-h|--help
+
+-V|--version
+
+Tested with Dell PowerEdge servers Gen 11, 12, 13 and 14 (rackmounts and blades), Dell Chassis (M1000e and VRTX) and Dell PowerEdge M I/O Aggregator (IOA) but it might work with other models too.
 
 ## Help
     ./check-dell-warranty.sh -h|--help
