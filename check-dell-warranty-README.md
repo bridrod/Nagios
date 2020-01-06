@@ -1,9 +1,11 @@
 # Nagios
-Monitoring Script for Dell Warranty; pulls Service Tag (STag) using SNMP:
-1. From server OS and the iDRAC automatically as a backup (in case SNMP under the OS doesn't work);
+Monitoring Script for Dell Warranty; It pulls the Service Tag (STag) using OS or Device SNMP. The following is supported/tested:
+
+1. From server OS or the iDRAC automatically as a backup (in case SNMP under the OS doesn't work);
 2. From Chassis;
 3. From Switch;
 
+## Info
 Dell has moved to a more secure method for obtaining information on devices (including warranty info). They moved away from API key (v4) to OAuthTLS2.0 (v5).
 
 The deadline to continue using the v4 of the API key was Dec, 15th 2019.
