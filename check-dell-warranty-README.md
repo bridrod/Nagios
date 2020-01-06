@@ -1,7 +1,7 @@
 # Nagios
 Monitoring Script for Dell Warranty; It pulls the Service Tag (STag) using OS or Device SNMP. The following is supported/tested:
 
-1. From server OS or the iDRAC automatically as a backup (in case SNMP under the OS doesn't work);
+1. From server OS (VMWare ESXi) or the iDRAC automatically as a backup (in case SNMP under the OS doesn't work);
 2. From Chassis;
 3. From Switch;
 
