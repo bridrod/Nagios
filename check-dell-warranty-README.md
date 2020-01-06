@@ -38,7 +38,9 @@ package=**snmp** for Ubuntu:       ***sudo apt-get install snmp***
 **Note:** Edit script and change the following lines (to match your environment):
 
 iDRACHOSTNAME="d-$HOSTNAME" (optional; In case you are checking warranty against servers)
+
 client_id='xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+
 client_secret='yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy'
 
 ## Usage
