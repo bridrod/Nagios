@@ -156,12 +156,12 @@ done
 iDRACHOSTNAME="d-$HOSTNAME"
 
 if [ "$TYPE" == "server" ]; then
-	STAG=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $HOSTNAME '.1.3.6.1.2.1.47.1.1.1.1.11.1' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d'`
-	MODEL=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $HOSTNAME '.1.3.6.1.2.1.47.1.1.1.1.13.1' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d'`
+	STAG=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $HOSTNAME '.1.3.6.1.2.1.47.1.1.1.1.11.1' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d' | sed 's/\s*$//g'`
+	MODEL=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $HOSTNAME '.1.3.6.1.2.1.47.1.1.1.1.13.1' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d' | sed 's/\s*$//g'`
 #	echo "Server 1st stag=$STAG"
 	if [ "$STAG" == "No Such Object available on this agent at this OID" ] || [ "$STAG" == "No Such Instance currently exists at this OID" ]; then
-		STAG=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $iDRACHOSTNAME '.1.3.6.1.4.1.674.10892.2.1.1.11.0' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d'`
-		MODEL=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $iDRACHOSTNAME '.1.3.6.1.4.1.674.10892.5.1.3.12.0' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d'`
+		STAG=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $iDRACHOSTNAME '.1.3.6.1.4.1.674.10892.2.1.1.11.0' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d' | sed 's/\s*$//g'`
+		MODEL=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $iDRACHOSTNAME '.1.3.6.1.4.1.674.10892.5.1.3.12.0' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d' | sed 's/\s*$//g'`
 #		echo "Server 2nd stag=$STAG"
 	fi
 	if [ "$MODEL" == "" ] || [ "$MODEL" == "No Such Object available on this agent at this OID" ] || [ "$MODEL" == "No Such Instance currently exists at this OID" ]; then
@@ -174,8 +174,8 @@ if [ "$TYPE" == "server" ]; then
 fi
 
 if [ "$TYPE" == "chassis" ]; then
-        STAG=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $HOSTNAME '.1.3.6.1.4.1.674.10892.2.1.1.6.0' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d'`
-        MODEL=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $HOSTNAME '.1.3.6.1.4.1.674.10892.2.1.1.2.0' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d'`
+        STAG=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $HOSTNAME '.1.3.6.1.4.1.674.10892.2.1.1.6.0' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d' | sed 's/\s*$//g'`
+        MODEL=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $HOSTNAME '.1.3.6.1.4.1.674.10892.2.1.1.2.0' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d' | sed 's/\s*$//g'`
 #		echo "Chassis stag=$STAG"
 	if [ "$MODEL" == "" ] || [ "$MODEL" == "No Such Object available on this agent at this OID" ] || [ "$MODEL" == "No Such Instance currently exists at this OID" ]; then
 				MODEL="UNKNOWN"
@@ -187,8 +187,8 @@ if [ "$TYPE" == "chassis" ]; then
 fi
 
 if [ "$TYPE" == "switch" ]; then
-        STAG=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $HOSTNAME '.1.3.6.1.4.1.674.10895.3000.1.2.100.8.1.4.1' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d'`
-        MODEL=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $HOSTNAME '.1.3.6.1.4.1.674.10895.3000.1.2.100.1.0' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d'`
+        STAG=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $HOSTNAME '.1.3.6.1.4.1.674.10895.3000.1.2.100.8.1.4.1' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d' | sed 's/\s*$//g'`
+        MODEL=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $HOSTNAME '.1.3.6.1.4.1.674.10895.3000.1.2.100.1.0' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d' | sed 's/\s*$//g'`
 #		echo "Switch stag=$STAG"
 	if [ "$MODEL" == "" ] || [ "$MODEL" == "No Such Object available on this agent at this OID" ] || [ "$MODEL" == "No Such Instance currently exists at this OID" ]; then
 				MODEL="UNKNOWN"
