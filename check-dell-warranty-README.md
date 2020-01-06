@@ -70,25 +70,23 @@ Tested with Dell PowerEdge servers Gen 11, 12, 13 and 14 (rackmounts and blades)
     ./check-dell-warranty.sh -h|--help
 
 ## Version
-    echo "Usage: check-dell-warranty.sh -V|--version"
+    ./check-dell-warranty.sh -V|--version"
 
 ### Sample Output
-    		CRITICAL: Device Dell PowerEdge M I/O Aggregator is out of warranty! Time to decommission or extend the warranty ASAP! Dell with Service Tag = xxxxxxx \ Dell Support Warranty End Date = 2020-01-02T05:59:59.999Z \ Days Left = -3|Days_Left=-3;90;30;0;365
-		Dell PowerEdge M I/O Aggregator with Service Tag = xxxxxxx \ Dell Support Warranty End Date = 2020-01-02T05:59:59.999Z \ Days Left = -3
+CRITICAL: Device Dell PowerEdge M I/O Aggregator is out of warranty! Time to decommission or extend the warranty ASAP! Dell with Service Tag = xxxxxxx \ Dell Support Warranty End Date = 2020-01-02T05:59:59.999Z \ Days Left = -3|Days_Left=-3;90;30;0;365
+Dell PowerEdge M I/O Aggregator with Service Tag = xxxxxxx \ Dell Support Warranty End Date = 2020-01-02T05:59:59.999Z \ Days Left = -3
 		
-		Warranty Date1 (Now) is 2020-01-06
-		Warranty Date2 (End) is 2020-01-02T05:59:59.999Z
-		Warranty End Date (Collection):
-		2020-01-02T05:59:59.999Z
-		
-		Dell device with Service Tag = xxxxxxx
-		Days Left = -3
-		
-		Warranty Date1 (Now) is 1578286800
-		Warranty Date1HUMAN (Now) is 2020-01-06
-		Warranty Date2 (End) is 1577944799
-		Warranty Date2HUMAN (End) is 2020-01-02T05:59:59.999Z
-		Warranty End Date (Collection) = 2020-01-02T05:59:59.999Z
-		Ship Date is 2015-07-27T05:00:00Z
-
-
+	Warranty Date1 (Now) is 2020-01-06
+	Warranty Date2 (End) is 2020-01-02T05:59:59.999Z
+	Warranty End Date (Collection):
+	2020-01-02T05:59:59.999Z
+	
+	Dell device with Service Tag = xxxxxxx
+	Days Left = -3
+	
+	Warranty Date1 (Now) is 1578286800
+	Warranty Date1HUMAN (Now) is 2020-01-06
+	Warranty Date2 (End) is 1577944799
+	Warranty Date2HUMAN (End) is 2020-01-02T05:59:59.999Z
+	Warranty End Date (Collection) = 2020-01-02T05:59:59.999Z
+	Ship Date is 2015-07-27T05:00:00Z
