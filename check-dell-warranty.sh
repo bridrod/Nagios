@@ -59,6 +59,7 @@ WarrantyEND=''
 WarrantyDate1=''
 WarrantyDate2=''
 DaysLeft=''
+iDRACHOSTNAME=''
 
 date2stamp () {
     date --utc --date "$1" +%s
@@ -152,17 +153,19 @@ while test -n "$1"; do
         shift
 done
 
+iDRACHOSTNAME="d-$HOSTNAME"
+
 if [ "$TYPE" == "server" ]; then
 	STAG=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $HOSTNAME '.1.3.6.1.2.1.47.1.1.1.1.11.1' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d'`
 	MODEL=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $HOSTNAME '.1.3.6.1.2.1.47.1.1.1.1.13.1' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d'`
 #	echo "Server 1st stag=$STAG"
 	if [ "$STAG" == "No Such Object available on this agent at this OID" ] || [ "$STAG" == "No Such Instance currently exists at this OID" ]; then
-		STAG=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot 'd-'$HOSTNAME '.1.3.6.1.4.1.674.10892.2.1.1.11.0' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d'`
-		MODEL=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot 'd-'$HOSTNAME '.1.3.6.1.4.1.674.10892.5.1.3.12.0' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d'`
+		STAG=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $iDRACHOSTNAME '.1.3.6.1.4.1.674.10892.2.1.1.11.0' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d'`
+		MODEL=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $iDRACHOSTNAME '.1.3.6.1.4.1.674.10892.5.1.3.12.0' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d'`
 #		echo "Server 2nd stag=$STAG"
 	fi
 	if [ "$MODEL" == "" ] || [ "$MODEL" == "No Such Object available on this agent at this OID" ] || [ "$MODEL" == "No Such Instance currently exists at this OID" ]; then
-				MODEL="Device_Unrecognized"
+				MODEL="UNKNOWN"
 	fi
 	if [ "$STAG" == "" ] || [ "$STAG" == "No Such Object available on this agent at this OID" ] || [ "$STAG" == "No Such Instance currently exists at this OID" ]; then
                 echo "WARNING: Unable to retrieve Service Tag! Please check whether SNMP is working on the device! Perhaps device/firmware/OS is too old?!"
@@ -175,7 +178,7 @@ if [ "$TYPE" == "chassis" ]; then
         MODEL=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $HOSTNAME '.1.3.6.1.4.1.674.10892.2.1.1.2.0' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d'`
 #		echo "Chassis stag=$STAG"
 	if [ "$MODEL" == "" ] || [ "$MODEL" == "No Such Object available on this agent at this OID" ] || [ "$MODEL" == "No Such Instance currently exists at this OID" ]; then
-				MODEL="Device_Unrecognized"
+				MODEL="UNKNOWN"
 	fi
 	if [ "$STAG" == "" ] || [ "$STAG" == "No Such Object available on this agent at this OID" ] || [ "$STAG" == "No Such Instance currently exists at this OID" ]; then
                 echo "WARNING: Unable to retrieve Service Tag! Please check whether SNMP is working on the device! Perhaps device/firmware/OS is too old?!"
@@ -188,7 +191,7 @@ if [ "$TYPE" == "switch" ]; then
         MODEL=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $HOSTNAME '.1.3.6.1.4.1.674.10895.3000.1.2.100.1.0' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d'`
 #		echo "Switch stag=$STAG"
 	if [ "$MODEL" == "" ] || [ "$MODEL" == "No Such Object available on this agent at this OID" ] || [ "$MODEL" == "No Such Instance currently exists at this OID" ]; then
-				MODEL="Device_Unrecognized"
+				MODEL="UNKNOWN"
 	fi
 	if [ "$STAG" == "" ] || [ "$STAG" == "No Such Object available on this agent at this OID" ] || [ "$STAG" == "No Such Instance currently exists at this OID" ]; then
                 echo "WARNING: Unable to retrieve Service Tag! Please check whether SNMP is working on the device! Perhaps device/firmware/OS is too old?!"
