@@ -10,17 +10,19 @@ The deadline to continue using the v4 of the API key was Dec, 15th 2019.
 
 In order to continue pulling device information from Dell's website it now requires v5. For that, you need to:
 
-1.	Submit a new request to obtain updated API credentials on TechDirect portal - https://techdirect.dell.com/portal.30/Login.aspx
-2.  Obtain credentials "Client_ID" and "Client_Secret" from Dell. Using credentials, generate Bearer token, which will be valid for 3600 seconds.
+1.	Submit a new request to obtain updated API credentials on TechDirect portal - https://techdirect.dell.com/portal.30/Login.aspx;
+2.  	Obtain credentials "Client_ID" and "Client_Secret" from Dell (The script will need to be edited to update these variables);
+ 
+ **Note0:** FYI, each generated Bearer token will be valid for 3600 seconds.
 
-For further details refer to SDK available on your Dell TechDirect account.
+For further details, please refer to SDK available on your Dell TechDirect account.
 
-**Note0:** In some cases, grabbing the STag might not be possible due to firewall, misconfigured/disabled SNMP settings in the OS or some other odd reason. To work around that, I enabled the option to pull it from the iDRAC automatically when type=server is selected and the script fails to pull from the OS. For that to work, you should have your iDRAC registered in DNS and using a pattern (i.e.: idrac-hostname). For this script we use "d-hostname". Feel free to modify it.
+**Note:** In some cases, grabbing the STag might not be possible due to firewall, misconfigured/disabled SNMP settings in the OS or some other odd reason. To work around that, I enabled the option to pull it from the iDRAC automatically when type=server is selected and the script fails to pull from the OS. For that to work, you should have your iDRAC registered in DNS and using a pattern (i.e.: idrac-hostname). For this script we use "d-hostname". Feel free to modify it.
 
 ## Requirements
 SNMP to be working (OS or Dell iDRAC, Dell Chassis, or Dell Switch);
 
-**Note1:** For OS, it was only tested under openSUSE and Ubuntu distros
+**Note:** For OS, it was only tested under openSUSE and Ubuntu distros
 
 Requires **sed** and **snmpget** tool. snmpget can be found in:
 
@@ -28,7 +30,7 @@ package=**net-snmp** for openSUSE: ***sudo zypper in net-snmp***
 
 package=**snmp** for Ubuntu:       ***sudo apt-get install snmp***
 
-**Note2:** Edit script and change the following lines (to match your environment):
+**Note:** Edit script and change the following lines (to match your environment):
 
 iDRACHOSTNAME="d-$HOSTNAME" (optional; In case you are checking warranty against servers)
 client_id='xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
