@@ -10,10 +10,14 @@ The deadline to continue using the v4 of the API key was Dec, 15th 2019.
 
 In order to continue pulling device information from Dell's website it now requires v5. For that, you need to:
 
-1.	Submit a new request to obtain updated API credentials on TechDirect portal - https://techdirect.dell.com/portal.30/Login.aspx;
-2.  	Obtain credentials "Client_ID" and "Client_Secret" from Dell (The script will need to be edited to update these variables);
+1 - Submit a new request to obtain updated API credentials on TechDirect portal - https://techdirect.dell.com/portal.30/Login.aspx;
+
+
+
+
+2 - Obtain credentials "Client_ID" and "Client_Secret" from Dell (The script will need to be edited to update these variables);
  
- **Note0:** FYI, each generated Bearer token will be valid for 3600 seconds.
+ **Note:** FYI, each generated Bearer token will be valid for 3600 seconds.
 
 For further details, please refer to SDK available on your Dell TechDirect account.
 
