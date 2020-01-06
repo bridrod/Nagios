@@ -90,7 +90,7 @@ Tested with Dell PowerEdge servers Gen 11, 12, 13 and 14 (rackmounts and blades)
 	Warranty Date2HUMAN (End) is 2020-01-02T05:59:59.999Z
 	Warranty End Date (Collection) = 2020-01-02T05:59:59.999Z
 	Ship Date is 2015-07-27T05:00:00Z
-
+	
 	OK: Device PowerEdge R640 is under warranty and has enough days left! Dell with Service Tag = xxxxxxx \ Dell Support Warranty End Date = 2023-10-12T04:59:59.999Z \ Days Left = 1374|Days_Left=1374;90;30;0;365
 	PowerEdge R640 with Service Tag = xxxxxxx \ Dell Support Warranty End Date = 2023-10-12T04:59:59.999Z \ Days Left = 1374
 
@@ -108,3 +108,21 @@ Tested with Dell PowerEdge servers Gen 11, 12, 13 and 14 (rackmounts and blades)
 	Warranty Date2HUMAN (End) is 2023-10-12T04:59:59.999Z
 	Warranty End Date (Collection) = 2023-10-12T04:59:59.999Z
 	Ship Date is 2018-10-11T05:00:00Z
+
+	WARNING: Device PowerEdge R730 is still under warranty but it is below the WARNING alert threshold of 90 days! Dell with Service Tag = xxxxxxx  \ Dell Support Warranty End Date = 2020-03-07T05:59:59.999Z \ Days Left = 61|Days_Left=61;90;30;0;365
+	PowerEdge R730 with Service Tag = xxxxxxx  \ Dell Support Warranty End Date = 2020-03-07T05:59:59.999Z \ Days Left = 61
+
+	Warranty Date1 (Now) is 2020-01-06
+	Warranty Date2 (End) is 2020-03-07T05:59:59.999Z
+	Warranty End Date (Collection):
+	2020-03-07T05:59:59.999Z
+
+	Dell device with Service Tag = xxxxxxx 
+	Days Left = 61
+
+	Warranty Date1 (Now) is 1578286800
+	Warranty Date1HUMAN (Now) is 2020-01-06
+	Warranty Date2 (End) is 1583560799
+	Warranty Date2HUMAN (End) is 2020-03-07T05:59:59.999Z
+	Warranty End Date (Collection) = 2020-03-07T05:59:59.999Z
+	Ship Date is 2017-03-06T06:00:00Z
