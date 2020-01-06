@@ -1,5 +1,5 @@
 # Nagios
-Monitoring Script for Dell Warranty
+Monitoring Script for Dell Warranty, pulls Service Tag (STag) using SNMP from server OS and the iDRAC as a backup.
 
 Dell has moved to a more secure method for obtaining information on devices (including warranty info). They moved away from API key (v4) to OAuthTLS2.0 (v5).
 
@@ -12,14 +12,22 @@ In order to continue pulling device information from Dell's website it now requi
 
 For further details refer to SDK available on your Dell TechDirect account.
 
+**Note0:** In some cases, grabbing the STag might not be possible due to firewall, misconfigured/disabled SNMP settings in the OS or some other odd reason. To work around that, I enabled the option to pull it from the iDRAC automatically when type=server is selected and the script fails to pull from the OS. For that to work, you should have your iDRAC registered in DNS and using a pattern (i.e.: idrac-hostname). For this script we use "d-hostname". Feel free to modify it.
+
 ## Requirements
-**Note:** Only tested on openSUSE and Ubuntu distros
+**Note1:** Only tested on openSUSE and Ubuntu distros
 
 Requires **sed** and **snmpget** tool. snmpget can be found in:
 
 package=**net-snmp** for openSUSE: ***sudo zypper in net-snmp***
 
 package=**snmp** for Ubuntu:       ***sudo apt-get install snmp***
+
+**Note2:** Edit script and change the following lines (to match your environment):
+
+iDRACHOSTNAME="d-$HOSTNAME"
+client_id='xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+client_secret='yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy'
 
 ## Usage
     ./check-dell-warranty.sh -H|--hostname HOSTNAME -w|--warning <number of days> -c|--critical <number of days> -T|--type <server|chassis|switch> -C|--community 'SNMP_COMMUNITY_STRING'
