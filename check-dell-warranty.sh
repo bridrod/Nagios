@@ -7,7 +7,7 @@
 ### package=snmp for Ubuntu:       sudo apt-get install snmp
 
 REVISION="Revision 1.0"
-REVDATE="01-06-2020"
+REVDATE="01-07-2020"
 AUTHOR="bridrod - You might even script, but only Love builds! :)"
 PURPOSE="Checks Warranty on Dell devices using Dell API/SDK v5, which requires OAuthTLS2.0 for authorization"
 LICENSE="Distributed under GNU General Public License (GPL) v3.0 - http://www.fsf.org/licenses/gpl.txt"
