@@ -1,5 +1,19 @@
 # Nagios
-New monitoring Script for Dell Warranty using SNMP protocol;
+New monitoring script for Dell Warranty using SNMP protocol;
+
+# Targets
+Targets tested:
+
+OS=VMWare ESXi;
+
+Dell PowerEdge servers of generation 11, 12, 13 and 14 (rackmounts and blades);
+
+Dell Chassis (M1000e and VRTX)
+
+Dell PowerEdge M I/O Aggregator (IOA)
+
+It might work with other models/OSes too.
+
 
 ## How it works
 It pulls through SNMP, the Service Tag (STag) from target device or server and uses that to pull warranty information.
