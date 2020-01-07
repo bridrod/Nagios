@@ -93,7 +93,7 @@ check-dell-warranty.sh [options]
     ./check-dell-warranty.sh -V|--version"
 
 ### Sample Output
-	CRITICAL: Device Dell PowerEdge M I/O Aggregator is out of warranty! Time to decommission or extend the warranty ASAP! Dell with Service Tag = xxxxxxx \ Dell Support Warranty End Date = 2020-01-02T05:59:59.999Z \ Days Left = -3|Days_Left=-3;90;30;0;365
+	**CRITICAL**: Device Dell PowerEdge M I/O Aggregator is out of warranty! Time to decommission or extend the warranty ASAP! Dell with Service Tag = xxxxxxx \ Dell Support Warranty End Date = 2020-01-02T05:59:59.999Z \ Days Left = -3|Days_Left=-3;90;30;0;365
 	Dell PowerEdge M I/O Aggregator with Service Tag = xxxxxxx \ Dell Support Warranty End Date = 2020-01-02T05:59:59.999Z \ Days Left = -3
 		
 	Warranty Date1 (Now) is 2020-01-06
@@ -111,7 +111,7 @@ check-dell-warranty.sh [options]
 	Warranty End Date (Collection) = 2020-01-02T05:59:59.999Z
 	Ship Date is 2015-07-27T05:00:00Z
 	
-	OK: Device PowerEdge R640 is under warranty and has enough days left! Dell with Service Tag = xxxxxxx \ Dell Support Warranty End Date = 2023-10-12T04:59:59.999Z \ Days Left = 1374|Days_Left=1374;90;30;0;365
+	**OK:** Device PowerEdge R640 is under warranty and has enough days left! Dell with Service Tag = xxxxxxx \ Dell Support Warranty End Date = 2023-10-12T04:59:59.999Z \ Days Left = 1374|Days_Left=1374;90;30;0;365
 	PowerEdge R640 with Service Tag = xxxxxxx \ Dell Support Warranty End Date = 2023-10-12T04:59:59.999Z \ Days Left = 1374
 
 	Warranty Date1 (Now) is 2020-01-06
@@ -129,7 +129,7 @@ check-dell-warranty.sh [options]
 	Warranty End Date (Collection) = 2023-10-12T04:59:59.999Z
 	Ship Date is 2018-10-11T05:00:00Z
 
-	WARNING: Device PowerEdge R730 is still under warranty but it is below the WARNING alert threshold of 90 days! Dell with Service Tag = xxxxxxx  \ Dell Support Warranty End Date = 2020-03-07T05:59:59.999Z \ Days Left = 61|Days_Left=61;90;30;0;365
+	**WARNING:** Device PowerEdge R730 is still under warranty but it is below the WARNING alert threshold of 90 days! Dell with Service Tag = xxxxxxx  \ Dell Support Warranty End Date = 2020-03-07T05:59:59.999Z \ Days Left = 61|Days_Left=61;90;30;0;365
 	PowerEdge R730 with Service Tag = xxxxxxx  \ Dell Support Warranty End Date = 2020-03-07T05:59:59.999Z \ Days Left = 61
 
 	Warranty Date1 (Now) is 2020-01-06
