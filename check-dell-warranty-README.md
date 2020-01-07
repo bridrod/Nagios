@@ -151,4 +151,4 @@ check-dell-warranty.sh [options]
 
 ## Troubleshooting
 
-Use the Verbose option to print STag found and extra info
+Use the Verbose option to print extra info including the Service Tag
