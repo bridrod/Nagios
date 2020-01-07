@@ -1,5 +1,5 @@
 # Nagios
-Monitoring script for Dell Hardware Status using SNMP protocol.
+Monitoring script for Dell Hardware Status using SNMP protocol and iDRAC.
 
 # Targets
 Targets tested:
