@@ -6,7 +6,7 @@ Targets tested:
 
 Dell PowerEdge servers of generation 11, 12, 13 and 14 (rackmounts and blades);
 
-It might work with other models/OSes too. So, feel free to modify it to fit your needs.
+It might work with other Dell models too. So, feel free to modify it to fit your needs.
 
 ## How it works
 It pulls through SNMP, the specific Dell OID for device health (CPU, battery, disk controller, fan, memory, power supply, STag, temperature, VDisks, etc).
