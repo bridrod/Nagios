@@ -144,3 +144,7 @@ check-dell-warranty.sh [options]
 	Warranty Date2HUMAN (End) is 2020-03-07T05:59:59.999Z
 	Warranty End Date (Collection) = 2020-03-07T05:59:59.999Z
 	Ship Date is 2017-03-06T06:00:00Z
+
+## Troubleshooting
+
+Use the Verbose option to print STag found and extra info
