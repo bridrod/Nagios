@@ -1,9 +1,10 @@
 #!/bin/bash
 
 ### Only tested on openSUSE and Ubuntu distros
+### Requires sed
 ### Requires snmpget tool found in:
-###package=net-snmp for openSUSE: sudo zypper in net-snmp
-###package=snmp for Ubuntu:       sudo apt-get install snmp
+### package=net-snmp for openSUSE: sudo zypper in net-snmp
+### package=snmp for Ubuntu:       sudo apt-get install snmp
 
 REVISION="Revision 1.0"
 REVDATE="01-06-2020"
