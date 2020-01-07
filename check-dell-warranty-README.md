@@ -12,8 +12,9 @@ Dell Chassis (M1000e and VRTX)
 
 Dell PowerEdge M I/O Aggregator (IOA)
 
-It might work with other models/OSes too.
+It might work with other models/OSes too. So, feel free to modify it to fit your needs.
 
+For example, for windows OS running on blade, you might need OID=.1.3.6.1.4.1.674.10892.1.300.80.1.13.x instead
 
 ## How it works
 It pulls through SNMP, the Service Tag (STag) from target device or server and uses that to pull warranty information.
