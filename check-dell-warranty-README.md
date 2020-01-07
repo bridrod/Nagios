@@ -2,7 +2,7 @@
 New monitoring Script for Dell Warranty using SNMP protocol;
 
 ## How it works
-It pulls through SNMP, the Service Tag (STag) from target device or server and uses that to pull warranty informaton.
+It pulls through SNMP, the Service Tag (STag) from target device or server and uses that to pull warranty information.
 
 There are three options (server|chassis|switch) to choose from (the following is supported/tested):
 
