@@ -90,7 +90,7 @@ check-dell-warranty.sh [options]
     ./check-dell-warranty.sh -h|--help
 
 ## Version
-    ./check-dell-warranty.sh -V|--version"
+    ./check-dell-warranty.sh -v|--version"
 
 ### Sample Output
 	CRITICAL: Device Dell PowerEdge M I/O Aggregator is out of warranty! Time to decommission or extend the warranty ASAP! Dell with Service Tag = xxxxxxx \ Dell Support Warranty End Date = 2020-01-02T05:59:59.999Z \ Days Left = -3|Days_Left=-3;90;30;0;365
