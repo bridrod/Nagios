@@ -46,27 +46,27 @@ check-dell-server.sh [options]
 ### Sample Output
 	OK: Dell Server STag=xxxxxxx is Healthy (total issues count = 0) ; Dell iDRAC Model = iDRAC7 \ Dell CPU Health Status = 3 \ Dell Battery Health Status = 3 \ Dell Disk Controller Health Status = Not Present \ Dell FAN Health Status = Not Present \ Dell Memory Health Status = 3 \ Dell Physical Disk Health Status = Not Present \ Dell PowerSupply Health Status = Not Present \ Dell TEMP Health Status = 3 \ Dell vDisk Health Status = Not Present - NOTE: Any value other than 3 means UNHEALTHY
 
-TOTAL_ISSUES = 0
+	TOTAL_ISSUES = 0
 
-Dell Server STag=xxxxxxx
-Dell iDRAC Model = iDRAC7
+	Dell Server STag=xxxxxxx
+	Dell iDRAC Model = iDRAC7
 
-Dell CPU Health Status = 3
-Dell Battery Health Status = 3
-Dell Disk Controller Health Status = Not Present
-Dell FAN Health Status = Not Present
-Dell Memory Health Status = 3
-Dell Physical Disk Health Status = Not Present
-Dell PowerSupply Health Status = Not Present
-Dell TEMP Health Status = 3
-Dell vDisk Health Status = Not Present
-
-Dell Status Legend:
-OTHER (1) - UNKNOWN
-UNKNOWN (2) - UNKNOWN
-OK (3) - UP (GREEN)
-NON-CRITICAL (4) - WARNING
-CRITICAL (5) - CRITICAL
-NON-RECOVERABLE (6) - CRITICAL
-
-NOTE: Any value other than 3 means UNHEALTHY
+	Dell CPU Health Status = 3
+	Dell Battery Health Status = 3
+	Dell Disk Controller Health Status = Not Present
+	Dell FAN Health Status = Not Present
+	Dell Memory Health Status = 3
+	Dell Physical Disk Health Status = Not Present
+	Dell PowerSupply Health Status = Not Present
+	Dell TEMP Health Status = 3
+	Dell vDisk Health Status = Not Present
+	
+	Dell Status Legend:
+	OTHER (1) - UNKNOWN
+	UNKNOWN (2) - UNKNOWN
+	OK (3) - UP (GREEN)
+	NON-CRITICAL (4) - WARNING
+	CRITICAL (5) - CRITICAL
+	NON-RECOVERABLE (6) - CRITICAL
+	
+	NOTE: Any value other than 3 means UNHEALTHY
