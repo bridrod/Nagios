@@ -1,5 +1,5 @@
 # Nagios
-New monitoring script for Dell Warranty using SNMP protocol;
+New monitoring script for Dell Warranty using SNMP protocol; Provides performance data as well.
 
 # Targets
 Targets tested:
