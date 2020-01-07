@@ -82,7 +82,9 @@ check-dell-warranty.sh [options]
 
 -h|--help
 
--V|--version
+-v|--version
+
+-V|--verbose
 
 ## Help
     ./check-dell-warranty.sh -h|--help
