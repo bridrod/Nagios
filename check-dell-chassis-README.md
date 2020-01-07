@@ -44,28 +44,28 @@ check-dell-chassis.sh [options]
     ./check-dell-chassis.sh -v|--version"
 
 ### Sample Output
-			OK: Dell Chassis STag=xxxxxxx is Healthy (total issues count = 0) ; Dell Chassis Global Health Status = 3 \ Dell Chassis IOM Health Status = 3 \ Dell Chassis KVM Health Status = 3 \ Dell Chassis RED Health Status = 3 \ Dell Chassis POWER Health Status = 3 \ Dell Chassis FAN Health Status = 3 \ Dell Chassis BLADE Health Status = 3 \ Dell Chassis TEMP Health Status = 3 \ Dell Chassis CMC Health Status = 3 - NOTE: Any value other than 3 means UNHEALTHY
-		
-		TOTAL_ISSUES = 0
-		
-		Dell Chassis STag=xxxxxxx
-		Dell Chassis Global Health Status = 3
-		
-		Dell Chassis IOM Health Status = 3
-		Dell Chassis KVM Health Status = 3
-		Dell Chassis RED Health Status = 3
-		Dell Chassis POWER Health Status = 3
-		Dell Chassis FAN Health Status = 3
-		Dell Chassis BLADE Health Status = 3
-		Dell Chassis TEMP Health Status = 3
-		Dell Chassis CMC Health Status = 3
-		
-		Dell Status Legend:
-		OTHER (1) - UNKNOWN
-		UNKNOWN (2) - UNKNOWN
-		OK (3) - UP (GREEN)
-		NON-CRITICAL (4) - WARNING
-		CRITICAL (5) - CRITICAL
-		NON-RECOVERABLE (6) - CRITICAL
-		
-		NOTE: Any value other than 3 means UNHEALTHY
+	OK: Dell Chassis STag=xxxxxxx is Healthy (total issues count = 0) ; Dell Chassis Global Health Status = 3 \ Dell Chassis IOM Health Status = 3 \ Dell Chassis KVM Health Status = 3 \ Dell Chassis RED Health Status = 3 \ Dell Chassis POWER Health Status = 3 \ Dell Chassis FAN Health Status = 3 \ Dell Chassis BLADE Health Status = 3 \ Dell Chassis TEMP Health Status = 3 \ Dell Chassis CMC Health Status = 3 - NOTE: Any value other than 3 means UNHEALTHY
+	
+	TOTAL_ISSUES = 0
+	
+	Dell Chassis STag=xxxxxxx
+	Dell Chassis Global Health Status = 3
+	
+	Dell Chassis IOM Health Status = 3
+	Dell Chassis KVM Health Status = 3
+	Dell Chassis RED Health Status = 3
+	Dell Chassis POWER Health Status = 3
+	Dell Chassis FAN Health Status = 3
+	Dell Chassis BLADE Health Status = 3
+	Dell Chassis TEMP Health Status = 3
+	Dell Chassis CMC Health Status = 3
+	
+	Dell Status Legend:
+	OTHER (1) - UNKNOWN
+	UNKNOWN (2) - UNKNOWN
+	OK (3) - UP (GREEN)
+	NON-CRITICAL (4) - WARNING
+	CRITICAL (5) - CRITICAL
+	NON-RECOVERABLE (6) - CRITICAL
+	
+	NOTE: Any value other than 3 means UNHEALTHY
