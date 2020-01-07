@@ -83,8 +83,6 @@ check-dell-warranty.sh [options]
 
 -V|--version
 
-Tested with Dell PowerEdge servers Gen 11, 12, 13 and 14 (rackmounts and blades), Dell Chassis (M1000e and VRTX) and Dell PowerEdge M I/O Aggregator (IOA) but it might work with other models too.
-
 ## Help
     ./check-dell-warranty.sh -h|--help
 
