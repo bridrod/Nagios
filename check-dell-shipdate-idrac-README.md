@@ -156,7 +156,7 @@ while test -n "$1"; do
         shift
 done
 
-iDRACHOSTNAME=""
+iDRACHOSTNAME="d-$HOSTNAME"
 
 if [ "$TYPE" == "server" ]; then
 	STAG=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $HOSTNAME '.1.3.6.1.2.1.47.1.1.1.1.11.1' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d' | sed 's/\s*$//g'`
@@ -262,8 +262,8 @@ if [ "$TYPE" == "switch" ]; then
 	fi	
 fi
 
-client_id=''
-client_secret=''
+client_id='xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+client_secret='yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy'
 grant_type='client_credentials'
 url_token='https://apigtwb2c.us.dell.com/auth/oauth/v2/token'
 url_warranty1='https://apigtwb2c.us.dell.com/PROD/sbil/eapi/v5/asset-entitlements/'
