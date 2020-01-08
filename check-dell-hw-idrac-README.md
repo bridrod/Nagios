@@ -12,7 +12,7 @@ It might work with other Dell models too. So, feel free to modify it to fit your
 It pulls info from iDRAC using RACADM tool.
 
 ## Requirements
-SNMP to be working (Dell iDRAC);
+Dell iDRAC configured to accept RACADM calls (Remote RACADM enabled);
 
 **Note:** This is a linux script tested under openSUSE and Ubuntu distros
 
