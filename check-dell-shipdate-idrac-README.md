@@ -1,283 +1,100 @@
-#!/bin/bash
+# Nagios
+New monitoring script for Dell Ship Date using SNMP protocol.
 
-### Only tested on openSUSE and Ubuntu distros
-### Requires sed
-### Requires snmpget tool found in:
-### package=net-snmp for openSUSE: sudo zypper in net-snmp
-### package=snmp for Ubuntu:       sudo apt-get install snmp
+# Targets
+Targets tested:
 
-REVISION="Revision 1.0"
-REVDATE="01-06-2020"
-AUTHOR="bridrod - You might even script, but only Love builds! :)"
-PURPOSE="Checks Ship Date for Dell devices using Dell API/SDK v5, which requires OAuthTLS2.0 for authorization"
-LICENSE="Distributed under GNU General Public License (GPL) v3.0 - http://www.fsf.org/licenses/gpl.txt"
+OS=VMWare ESXi;
 
-# Exit codes
-STATE_OK=0
-STATE_WARNING=1
-STATE_CRITICAL=2
+Dell PowerEdge servers of generation 11, 12, 13 and 14 (rackmounts and blades);
 
-print_revision() {
-    echo ""
-    echo "$REVISION - $REVDATE - by $AUTHOR"
-    echo "$LICENSE"
-    echo ""
-}
+Dell Chassis (M1000e and VRTX)
 
-print_usage() {
-    echo "Usage: check-dell-shipdate-idrac.sh -H|--hostname HOSTNAME -w|--warning <number of days> -c|--critical <number of days> -T|--type <server|chassis|switch> -C|--community 'SNMP_COMMUNITY_STRING' -V|--verbose"
-    echo "Usage: check-dell-shipdate-idrac.sh -h|--help"
-    echo "Usage: check-dell-shipdate-idrac.sh -v|--version"
-}
+Dell PowerEdge M I/O Aggregator (IOA)
 
-print_example() {
-    echo ""
-    echo "# e.g.: ./check-dell-shipdate-idrac.sh -H HOSTNAME -w 90 -c 60 -C 'SNMP_COMMUNITY_STRING'"
-}
+It might work with other models/OSes too. So, feel free to modify it to fit your needs.
 
-print_help() {
-    print_revision
-    echo ""
-    echo "$PURPOSE"
-    echo ""
-    print_usage
-    echo ""
-}
+For example, for windows OS running on blade, you might need OID=.1.3.6.1.4.1.674.10892.1.300.80.1.13.x instead
 
-### Make sure the correct number of command line arguments have been supplied (each space will count as a parameter)
-if [ $# -lt 10 ]; then
-        print_usage
-        print_example
-		print_revision
-        exit 3
-fi
+## How it works
+It pulls through SNMP, the Service Tag (STag) from target device or server and uses that to pull Shipping information.
 
-STAG=''
-iDRACHOSTNAME=''
-VERBOSE=0
+There are three options (server|chassis|switch) to choose from (the following is supported/tested):
 
-date2stamp () {
-    date --utc --date "$1" +%s
-}
+1. For **server**, it pulls from the server OS (VMWare ESXi) and in case that does not work, it tries through the iDRAC automatically as a backup option;
+2. From **chassis**;
+3. From **switch**;
 
-stamp2date (){
-    date --utc --date "1970-01-01 $1 sec" "+%Y-%m-%d %T"
-}
+## Info
+Dell has moved to a more secure method for obtaining information on devices (including warranty info). They moved away from API key (v4) to OAuthTLS2.0 (v5).
 
-dateDiff (){
-    case $1 in
-        -s)   sec=1;      shift;;
-        -m)   sec=60;     shift;;
-        -h)   sec=3600;   shift;;
-        -d)   sec=86400;  shift;;
-        *)    sec=86400;;
-    esac
-    dte1=$(date2stamp $1)
-    dte2=$(date2stamp $2)
-    diffSec=$((dte2-dte1))
-    if ((diffSec < 0)); then abs=-1; else abs=1; fi
-    echo $((diffSec/sec*abs))
-}
+The deadline to continue using the v4 of the API key was Dec, 15th 2019.
 
-exitstatus=$STATE_WARNING #default
-while test -n "$1"; do
-        case "$1" in
-        --help)
-                print_help
-                exit $STATE_OK
-                ;;
-        -h)
-                print_help
-                exit $STATE_OK
-                ;;
-        --version)
-                print_revision $PROGNAME $VERSION
-                exit $STATE_OK
-                ;;
-        -v)
-                print_revision $PROGNAME $VERSION
-                exit $STATE_OK
-                ;;
-        -H)
-                HOSTNAME=$2
-                shift
-                ;;
-        --hostname)
-                HOSTNAME=$2
-                shift
-                ;;
-        -w)
-                WARNING=$2
-                shift
-                ;;
-        --warning)
-                WARNING=$2
-                shift
-                ;;
-        -c)
-                CRITICAL=$2
-                shift
-                ;;
-        --critical)
-                CRITICAL=$2
-                shift
-                ;;
-	-T)
-                TYPE=$2
-                shift
-                ;;
-        --type)
-                TYPE=$2
-                shift
-                ;;
-         -C)
-                COMMUNITY=$2
-                shift
-                ;;
-        --community)
-                COMMUNITY=$2
-                shift
-                ;;
-         -V)
-                VERBOSE=1
-                shift
-                ;;
-        --verbose)
-                VERBOSE=1
-                shift
-                ;;
-	*)
-                echo "Unknown argument: $1"
-                print_usage
-                print_example
-                exit $STATE_UNKNOWN
-                ;;
-        esac
-        shift
-done
+In order to continue pulling device information from Dell's website it now requires v5. For that, you need to:
 
-iDRACHOSTNAME="d-$HOSTNAME"
 
-if [ "$TYPE" == "server" ]; then
-	STAG=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $HOSTNAME '.1.3.6.1.2.1.47.1.1.1.1.11.1' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d' | sed 's/\s*$//g'`
-	MODEL=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $HOSTNAME '.1.3.6.1.2.1.47.1.1.1.1.13.1' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d' | sed 's/\s*$//g'`
+1. Submit a new request to obtain updated API credentials on TechDirect portal - https://techdirect.dell.com/portal.30/Login.aspx;
 
-	if [ "$TYPE" == "server" ] && [ "$VERBOSE" == 1 ]; then
-		echo "Server hostname=$HOSTNAME ; iDRAC hostname=$iDRACHOSTNAME"
-		echo "Server STag=$STAG"
-	fi
+2. Obtain credentials "Client_ID" and "Client_Secret" from Dell (The script will need to be edited to update these variables);
+ 
+ 
+ **Note:** FYI, each generated Bearer token will be valid for 3600 seconds.
 
-	if [ "$STAG" == "No Such Object available on this agent at this OID" ] || [ "$STAG" == "No Such Instance currently exists at this OID" ]; then
-		STAG=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $iDRACHOSTNAME '.1.3.6.1.4.1.674.10892.2.1.1.11.0' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d' | sed 's/\s*$//g'`
-		MODEL=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $iDRACHOSTNAME '.1.3.6.1.4.1.674.10892.5.1.3.12.0' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d' | sed 's/\s*$//g'`
-	fi
+For further details, please refer to SDK available on your Dell TechDirect account.
 
-	if [ "$STAG" == "No Such Object available on this agent at this OID" ] && [ "$VERBOSE" == 1 ]; then
-		echo "iDRAC STag=$STAG"
-	fi
+**Note:** In some cases, grabbing the STag might not be possible due to firewall, misconfigured/disabled SNMP settings in the Server OS or some other odd reason. To work around that, I enabled the option to pull it from the iDRAC automatically when type=server is selected and if the script fails to pull from the Server OS. For that to work, you should have your iDRAC registered in DNS and using a pattern (i.e.: idrac-hostname). For this script we use "d-hostname". Feel free to modify it.
 
-	if [ "$STAG" == "No Such Instance currently exists at this OID" ] && [ "$VERBOSE" == 1 ]; then
-		echo "iDRAC STag=$STAG"
-	fi
+## Requirements
+SNMP to be working (Server OS/Dell iDRAC, Dell Chassis, or Dell Switch);
 
-	if [ "$MODEL" == "" ] || [ "$MODEL" == "No Such Object available on this agent at this OID" ] || [ "$MODEL" == "No Such Instance currently exists at this OID" ]; then
-		MODEL="UNKNOWN"
-	fi
+**Note:** This is a linux script tested under openSUSE and Ubuntu distros
 
-	if [ "$MODEL" == "" ] && [ "$VERBOSE" == 1 ]; then
-		echo "Device Model=$MODEL"
-	fi
+Requires **sed** and **snmpget** tool. snmpget can be found in:
 
-	if [ "$MODEL" == "No Such Object available on this agent at this OID" ] && [ "$VERBOSE" == 1 ]; then
-		echo "Device Model=$MODEL"
-	fi
+package=**net-snmp** for openSUSE: ***sudo zypper in net-snmp***
 
-	if [ "$MODEL" == "No Such Instance currently exists at this OID" ] && [ "$VERBOSE" == 1 ]; then
-		echo "Device Model=$MODEL"
-	fi
+package=**snmp** for Ubuntu:       ***sudo apt-get install snmp***
 
-	if [ "$STAG" == "" ] || [ "$STAG" == "No Such Object available on this agent at this OID" ] || [ "$STAG" == "No Such Instance currently exists at this OID" ]; then
-		echo "WARNING: Unable to retrieve Service Tag! Please check whether SNMP is working on the device! Perhaps device/firmware/OS is too old?!"
-		exit 1
-	fi	
-fi
+**Note:** Edit script and change the following lines (to match your environment):
 
-if [ "$TYPE" == "chassis" ]; then
-    STAG=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $HOSTNAME '.1.3.6.1.4.1.674.10892.2.1.1.6.0' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d' | sed 's/\s*$//g'`
-    MODEL=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $HOSTNAME '.1.3.6.1.4.1.674.10892.2.1.1.2.0' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d' | sed 's/\s*$//g'`
-
-	if [ "$TYPE" == "chassis" ] && [ "$VERBOSE" == 1 ]; then
-		echo "Chassis STag=$STAG"
-	fi
-		
-	if [ "$MODEL" == "" ] || [ "$MODEL" == "No Such Object available on this agent at this OID" ] || [ "$MODEL" == "No Such Instance currently exists at this OID" ]; then
-		MODEL="UNKNOWN"
-	fi
-
-	if [ "$MODEL" == "" ] && [ "$VERBOSE" == 1 ]; then
-		echo "Device Model=$MODEL"
-	fi
-
-	if [ "$MODEL" == "No Such Object available on this agent at this OID" ] && [ "$VERBOSE" == 1 ]; then
-		echo "Device Model=$MODEL"
-	fi
-
-	if [ "$MODEL" == "No Such Instance currently exists at this OID" ] && [ "$VERBOSE" == 1 ]; then
-		echo "Device Model=$MODEL"
-	fi
-
-	if [ "$STAG" == "" ] || [ "$STAG" == "No Such Object available on this agent at this OID" ] || [ "$STAG" == "No Such Instance currently exists at this OID" ]; then
-		echo "WARNING: Unable to retrieve Service Tag! Please check whether SNMP is working on the device! Perhaps device/firmware/OS is too old?!"
-		exit 1
-	fi	
-fi
-
-if [ "$TYPE" == "switch" ]; then
-        STAG=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $HOSTNAME '.1.3.6.1.4.1.674.10895.3000.1.2.100.8.1.4.1' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d' | sed 's/\s*$//g'`
-        MODEL=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $HOSTNAME '.1.3.6.1.4.1.674.10895.3000.1.2.100.1.0' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d' | sed 's/\s*$//g'`
-
-	if [ "$TYPE" == "switch" ] && [ "$VERBOSE" == 1 ]; then
-		echo "Switch STag=$STAG"
-	fi
-
-	if [ "$MODEL" == "" ] || [ "$MODEL" == "No Such Object available on this agent at this OID" ] || [ "$MODEL" == "No Such Instance currently exists at this OID" ]; then
-		MODEL="UNKNOWN"
-	fi
-
-	if [ "$MODEL" == "" ] && [ "$VERBOSE" == 1 ]; then
-		echo "Device Model=$MODEL"
-	fi
-
-	if [ "$MODEL" == "No Such Object available on this agent at this OID" ] && [ "$VERBOSE" == 1 ]; then
-		echo "Device Model=$MODEL"
-	fi
-
-	if [ "$MODEL" == "No Such Instance currently exists at this OID" ] && [ "$VERBOSE" == 1 ]; then
-		echo "Device Model=$MODEL"
-	fi
-
-	if [ "$STAG" == "" ] || [ "$STAG" == "No Such Object available on this agent at this OID" ] || [ "$STAG" == "No Such Instance currently exists at this OID" ]; then
-		echo "WARNING: Unable to retrieve Service Tag! Please check whether SNMP is working on the device! Perhaps device/firmware/OS is too old?!"
-		exit 1
-	fi	
-fi
+iDRACHOSTNAME="d-$HOSTNAME" (this part is optional; SNMP needs to be configured properly in iDRAC. The script will try to check warranty against the iDRAC automatically if the script fails to check against the server OS)
 
 client_id='xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+
 client_secret='yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy'
-grant_type='client_credentials'
-url_token='https://apigtwb2c.us.dell.com/auth/oauth/v2/token'
-url_warranty1='https://apigtwb2c.us.dell.com/PROD/sbil/eapi/v5/asset-entitlements/'
-url_warranty2='https://apigtwb2c.us.dell.com/PROD/sbil/eapi/v5/assets/'
-access_token=`curl -X POST -d "client_id=$client_id&client_secret=$client_secret&grant_type=$grant_type" $url_token 2>&1 | sed 's/",/",\n/g' | grep access_token | sed 's/  "access_token":"//g' | sed 's/",//g'`
 
-if [ "$VERBOSE" == 1 ]; then
-	warranty_output=`curl -H "Authorization: Bearer $access_token" $url_warranty1?servicetags=$STAG`
-	else
-	warranty_output=`curl -H "Authorization: Bearer $access_token" $url_warranty1?servicetags=$STAG 2>/dev/null`
-fi
+## Usage
+    ./check-dell-shipdate-idrac.sh -H|--hostname HOSTNAME -w|--warning <number of days> -c|--critical <number of days> -T|--type <server|chassis|switch> -C|--community 'SNMP_COMMUNITY_STRING'
+    
+Usage:
 
-ShipDate=`curl -H "Authorization: Bearer $access_token" $url_warranty1?servicetags=$STAG 2>&1 | sed 's/",/",\n/g' | sed 's/",//g' | sed 's/^.*shipDate/shipDate/' | grep shipDate | sed 's/shipDate":"//g'`
-ShipDate2Human=`echo $ShipDate | cut -d 'T' -f 1`
-ShipDate2HumanReverse=`date -d "$ShipDate2Human" +%m-%d-%Y`
+check-dell-shipdate-idrac.sh [options]
 
-echo "OK: Device=$HOSTNAME with STag=$STAG was shipped in $ShipDate2Human, so the ship date=$ShipDate2HumanReverse"
+-H|--hostname HOSTNAME to pull SNMP 
+
+-w|--warning <number of days>
+	
+-c|--critical <number of days>
+	
+-T|--type <server|chassis|switch>
+
+-C|--community 'SNMP_COMMUNITY_STRING'
+
+-h|--help
+
+-v|--version
+
+-V|--verbose
+
+## Help
+    ./check-dell-shipdate-idrac.sh -h|--help
+
+## Version
+    ./check-dell-shipdate-idrac.sh -v|--version"
+
+### Sample Output
+	OK: Device=HOSTNAME with STag=xxxxxxx was shipped in 2010-03-20, so the ship date=03-20-2010
+
+## Troubleshooting
+
+Use the Verbose option to print extra info including the Service Tag
