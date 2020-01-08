@@ -42,4 +42,4 @@ check-dell-model.sh [options]
 
 ### Sample Output
 	DELL_MODEL = PowerEdge M620 (short output)
-  DELL_MODEL = PowerEdge M620 (long output)
+  	DELL_MODEL = PowerEdge M620 (long output)
