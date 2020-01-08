@@ -124,42 +124,43 @@ virdisk_name=""
 virdisk_status=""
 idrac_model=""
 
-idrac_model=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.2.1.1.2.0 | awk '{$1=$2="";print}' | tr -d '". '`
+idrac_model=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.2.1.1.2.0 -t 45 | awk '{$1=$2="";print}' | tr -d '". '`
 
 if [[ "$idrac_model" = "NoSuchInstancecurrentlyexistsatthisOID" ]] || [[ "$idrac_model" = "NoSuchObjectavailableonthisagentatthisOID " ]]; then
-		idrac_model=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.1.1.2.0 | awk '{$1=$2="";print}' | tr -d '". '`
+		idrac_model=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.1.1.2.0 -t 45 | awk '{$1=$2="";print}' | tr -d '". '`
 fi
 if [[ "$idrac_model" = "NoSuchInstancecurrentlyexistsatthisOID" ]] || [[ "$server_tag" = "NoSuchObjectavailableonthisagentatthisOID " ]]; then
-		idrac_model=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.300.60.1.8.1.1 | awk '{$1=$2="";print}' | tr -d '". '`
+		idrac_model=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.300.60.1.8.1.1 -t 45 | awk '{$1=$2="";print}' | tr -d '". '`
 fi
 
-cpu_status=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.200.10.1.50.1 | awk '{$1=$2="";print}' | tr -d '". '`
-battery_location=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.600.50.1.7.1 | awk '{$1=$2="";print}' | tr -d '". '`
-battery_status_combined=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.200.10.1.52.1 | awk '{$1=$2="";print}' | tr -d '". '`
-battery_status=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.600.50.1.5.1 | awk '{$1=$2="";print}' | tr -d '". '`
-disk_controller_name=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.5.1.20.130.1.1.2 | awk '{$1=$2="";print}' | tr -d '". '`
-disk_controller_status=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.5.1.20.130.1.1.38 | awk '{$1=$2="";print}' | tr -d '". '`
-fan_name=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.700.12.1.8.1 | awk '{$1=$2="";print}' | tr -d '". '`
-fan_speed=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.700.12.1.6.1 | awk '{$1=$2="";print}' | tr -d '". '`
-fan_status_combined=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.200.10.1.21.1 | awk '{$1=$2="";print}' | tr -d '". '`
-fan_status=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.700.12.1.5.1 | awk '{$1=$2="";print}' | tr -d '". '`
-memory_size=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.1100.50.1.14.1 | awk '{$1=$2="";print}' | tr -d '". '`
-memory_status=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.200.10.1.27.1 | awk '{$1=$2="";print}' | tr -d '". '`
-phydisk_name=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.5.1.20.130.4.1.55 | awk '{$1=$2="";print}' | tr -d '". '`
-phydisk_status=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.5.1.20.130.4.1.24 | awk '{$1=$2="";print}' | tr -d '". '`
-ps_involtage=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.600.20.1.6.1 | awk '{$1=$2="";print}' | tr -d '". '`
-ps_name=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.600.12.1.15.1 | awk '{$1=$2="";print}' | tr -d '". '`
-ps_status_combined=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.200.10.1.9.1 | awk '{$1=$2="";print}' | tr -d '". '`
-ps_status=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.600.12.1.11.1 | awk '{$1=$2="";print}' | tr -d '". '`
-server_name=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.1.3.12.0 | awk '{$1=$2="";print}' | tr -d '". '`
-server_tag=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.2.1.1.11.0 | awk '{$1=$2="";print}' | tr -d '". '`
-software_version=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.1.3.6.0 | awk '{$1=$2="";print}' | tr -d '". '`
-temperature_Celsius=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.700.20.1.6.1 | awk '{$1=$2="";print}' | tr -d '". '`
-temperature_name=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.700.20.1.8.1 | awk '{$1=$2="";print}' | tr -d '". '`
-temperature_status_combined=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.200.10.1.24.1 | awk '{$1=$2="";print}' | tr -d '". '`
-temperature_status=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.700.20.1.5.1 | awk '{$1=$2="";print}' | tr -d '". '`
-virdisk_name=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.5.1.20.140.1.1.36 | awk '{$1=$2="";print}' | tr -d '". '`
-virdisk_status=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.5.1.20.140.1.1.20 | awk '{$1=$2="";print}' | tr -d '". '`
+cpu_status=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.200.10.1.50.1 -t 45 | awk '{$1=$2="";print}' | tr -d '". '`
+battery_location=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.600.50.1.7.1 -t 45 | awk '{$1=$2="";print}' | tr -d '". '`
+battery_status_combined=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.200.10.1.52.1 -t 45 | awk '{$1=$2="";print}' | tr -d '". '`
+battery_status=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.600.50.1.5.1 -t 45 | awk '{$1=$2="";print}' | tr -d '". '`
+disk_controller_name=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.5.1.20.130.1.1.2 -t 45 | awk '{$1=$2="";print}' | tr -d '". '`
+disk_controller_status=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.5.1.20.130.1.1.38 -t 45 | awk '{$1=$2="";print}' | tr -d '". '`
+fan_name=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.700.12.1.8.1 -t 45 | awk '{$1=$2="";print}' | tr -d '". '`
+fan_speed=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.700.12.1.6.1 -t 45 | awk '{$1=$2="";print}' | tr -d '". '`
+fan_status_combined=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.200.10.1.21.1 -t 45 | awk '{$1=$2="";print}' | tr -d '". '`
+fan_status=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.700.12.1.5.1 -t 45 | awk '{$1=$2="";print}' | tr -d '". '`
+memory_size=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.1100.50.1.14.1 -t 45 | awk '{$1=$2="";print}' | tr -d '". '`
+memory_status=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.200.10.1.27.1 -t 45 | awk '{$1=$2="";print}' | tr -d '". '`
+phydisk_name=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.5.1.20.130.4.1.55 -t 45 | awk '{$1=$2="";print}' | tr -d '". '`
+phydisk_status=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.5.1.20.130.4.1.24 -t 45 | awk '{$1=$2="";print}' | tr -d '". '`
+ps_involtage=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.600.20.1.6.1 -t 45 | awk '{$1=$2="";print}' | tr -d '". '`
+ps_name=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.600.12.1.15.1 -t 45 | awk '{$1=$2="";print}' | tr -d '". '`
+ps_status_combined=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.200.10.1.9.1 -t 45 | awk '{$1=$2="";print}' | tr -d '". '`
+ps_status=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.600.12.1.11.1 -t 45 | awk '{$1=$2="";print}' | tr -d '". '`
+server_name=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.1.3.12.0 -t 45 | awk '{$1=$2="";print}' | tr -d '". '`
+#server_tag=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.1.3.18.0 -t 45 | awk '{$1=$2="";print}' | tr -d '". '`
+server_tag=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.2.1.1.11.0 -t 45 | awk '{$1=$2="";print}' | tr -d '". '`
+software_version=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.1.3.6.0 -t 45 | awk '{$1=$2="";print}' | tr -d '". '`
+temperature_Celsius=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.700.20.1.6.1 -t 45 | awk '{$1=$2="";print}' | tr -d '". '`
+temperature_name=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.700.20.1.8.1 -t 45 | awk '{$1=$2="";print}' | tr -d '". '`
+temperature_status_combined=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.200.10.1.24.1 -t 45 | awk '{$1=$2="";print}' | tr -d '". '`
+temperature_status=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.4.700.20.1.5.1 -t 45 | awk '{$1=$2="";print}' | tr -d '". '`
+virdisk_name=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.5.1.20.140.1.1.36 -t 45 | awk '{$1=$2="";print}' | tr -d '". '`
+virdisk_status=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.5.5.1.20.140.1.1.20 -t 45 | awk '{$1=$2="";print}' | tr -d '". '`
 
 let TOTAL_ISSUES=0
 
