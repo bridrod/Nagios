@@ -42,7 +42,7 @@ In order to continue pulling device information from Dell's website it now requi
 
 For further details, please refer to SDK available on your Dell TechDirect account.
 
-**Note:** In some cases, grabbing the STag might not be possible due to firewall, misconfigured/disabled SNMP settings in the Server OS or some other odd reason. To work around that, I enabled the option to pull it from the iDRAC automatically when type=server is selected and if the script fails to pull from the Server OS. For that to work, you should have your iDRAC registered in DNS and using a pattern (i.e.: idrac-hostname). For this script we use "d-hostname". Feel free to modify it.
+**Note:** In some cases, grabbing the STag might not be possible due to firewall, misconfigured/disabled SNMP settings in the Server OS or some other odd reason. To work around that, I enabled the option to pull it from the iDRAC automatically when type=server is selected and if the script fails to pull from the Server OS. For that to work, you should have your iDRAC registered in DNS and using a pattern (i.e.: idrac-hostname). For this script we use "idrac-hostname". Feel free to modify it.
 
 ## Requirements
 SNMP to be working (Server OS/Dell iDRAC, Dell Chassis, or Dell Switch);
@@ -57,7 +57,7 @@ package=**snmp** for Ubuntu:       ***sudo apt-get install snmp***
 
 **Note:** Edit script and change the following lines (to match your environment):
 
-iDRACHOSTNAME="d-$HOSTNAME" (this part is optional; SNMP needs to be configured properly in iDRAC. The script will try to check warranty against the iDRAC automatically if the script fails to check against the server OS)
+iDRACHOSTNAME="idrac-$HOSTNAME" (this part is optional; SNMP needs to be configured properly in iDRAC. The script will try to check warranty against the iDRAC automatically if the script fails to check against the server OS)
 
 client_id='xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 
