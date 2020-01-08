@@ -27,7 +27,7 @@ Usage:
 
 check-dell-hw-idrac.sh [options]
 
--H|--hostname HOSTNAME or IP to pull SNMP from
+-H|--hostname iDRAC HOSTNAME or IP to pull info from
 
 -h|--help
 
