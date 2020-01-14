@@ -43,6 +43,10 @@ check-vsphere-lun-multipath.sh [options]
 
 -H|--hostname HOSTNAME or IP to pull info from
 
+-u|--username USERNAME
+
+-p|--password PASSWORD
+
 -h|--help
 
 -v|--version
