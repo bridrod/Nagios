@@ -25,7 +25,7 @@ Targets tested: EMC = CLARiiON, DMX, VMAX, vPLEX, XtremIO; Hitach = VSP (1000, 1
 It might work with other disk arrays too. So, feel free to modify it to fit your needs.
 
 ## How it works
-It uses ESXCLI from VMware vSphere Perl SDK.
+It uses ESXCLI from VMware vSphere Perl SDK, to pull information related to disks found and check multipath policy set.
 
 ## Requirements
 VMware vSphere Perl SDK. Tested with v5.5.0 through v6.7.0;
