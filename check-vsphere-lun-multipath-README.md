@@ -1,53 +1,51 @@
 # Nagios
-Monitoring script for checking vSphere ESXi multipathing on multiple disk arrays (EMC, HITACHI, XTREMIO, IBM, DELL) Dell Local Disks and CD-ROM
+Monitoring script for checking vSphere ESXi multipathing on multiple disk arrays (EMC, HITACHI, XTREMIO, IBM, DELL) Dell Local Disks and CD-ROM, based on the following path policies:
+
+#DGC = VMW_SATP_CX = VMW_PSP_MRU
+#EMC = VMW_SATP_SYMM or VMW_SATP_INV = VMW_PSP_RR
+#HITACHI = VMW_SATP_DEFAULT_AA = VMW_PSP_RR
+#XtremIO = VMW_SATP_DEFAULT_AA = VMW_PSP_RR
+#IBM = VMW_SATP_ALUA = VMW_PSP_RR
+#DELL = VMW_SATP_LOCAL = VMW_PSP_FIXED
+#DELL VRTX = VMW_SATP_ALUA = VMW_PSP_MRU
+#DP = VMW_SATP_LOCAL = VMW_PSP_FIXED
+#CD-ROM = VMW_SATP_LOCAL = VMW_PSP_FIXED
+
 
 # Targets
-Targets tested: CLARiiON, VNX, DMX, VSP, 
+Targets tested: EMC = CLARiiON, DMX, VMAX, vPLEX, XtremIO; Hitach = VSP (1000, 1500); IBM = DS8870; Dell VRTX (shared disks), Local disks and CD-ROM
 
 It might work with other disk arrays too. So, feel free to modify it to fit your needs.
 
 ## How it works
-It pulls info from iDRAC using RACADM tool.
+It uses ESXCLI from VMware vSphere Perl SDK.
 
 ## Requirements
-Dell iDRAC configured to accept RACADM calls (Remote RACADM enabled);
+VMware vSphere Perl SDK. Tested with v5.5.0 through v6.7.0;
 
 **Note:** This is a linux script tested under openSUSE and Ubuntu distros
 
-Requires **grep**, **awk**, **tr** and **sed**:
-
-Requires racadm tool found in "Dell EMC OpenManage Linux Remote Access Utilities, v9.x.x" @Dell's website
+Requires **grep**, **awk**, **tail**, **cut** and **sed**:
 
 ## Usage
-    ./check-dell-hw-idrac.sh -H iDRAC_HOSTNAME/IP
+    ./check-vsphere-lun-multipath.sh -H|--hostname -u|--username USERNAME -p|--password PASSWORD
     
 Usage:
 
-check-dell-hw-idrac.sh [options]
+check-vsphere-lun-multipath.sh [options]
 
--H|--hostname iDRAC HOSTNAME or IP to pull info from
+-H|--hostname HOSTNAME or IP to pull info from
 
 -h|--help
 
 -v|--version
 
 ## Help
-    ./check-dell-hw-idrac.sh -h|--help
+    ./check-vsphere-lun-multipath.sh -h|--help
 
 ## Version
-    ./check-dell-hw-idrac.sh -v|--version"
+    ./check-vsphere-lun-multipath.sh -v|--version"
 
 ### Sample Output
-	OS_NAME = VMware ESXi 6.5.0 build-8935087 \\ OS_VERSION = 6.5.0 Update 2 Patch 54 (build-8935087) Kernel 6.5.0 (x86_64) \\ SERVER = xxxxxxxxxx.domain \\ DELL_MODEL = PowerEdge M620 \\ STAG = xxxxxxx \\ BIOS_FIRM_VERSION = 2.7.0 \\ DRAC_VERSION = Dell Remote Access Controller \\ DRAC_FIRM_VERSION = 2.63.60.62
-	
-	OS_NAME = VMware ESXi 6.5.0 build-8935087
-	OS_VERSION = 6.5.0 Update 2 Patch 54 (build-8935087) Kernel 6.5.0 (x86_64)
-	SERVER = xxxxxxxxxx.domain
-	DELL_MODEL = PowerEdge M620
-	STAG = xxxxxxx
-	BIOS_FIRM_VERSION = 2.7.0
-	DRAC_TYPE = IDRACTYPE=17
-	DRAC_VERSION = Dell Remote Access Controller
-	DRAC_FIRM_VERSION = 2.63.60.62
-	DRAC_BUILD = 01
-	DRAC_NAME = iDRAC-xxxxxxxxxx
+	OK: All Storage Array Types and Path Selection Policies are correct for all datastores. Total issues count = 0
+	OK: All Storage Array Types and Path Selection Policies are correct for all datastores. Total issues count = 0. Issues per device as follows: DGC_TOTAL_ISSUES = 0; EMC_TOTAL_ISSUES = 0; HITACHI_TOTAL_ISSUES = 0; XTREMIO_TOTAL_ISSUES = 0; IBM_TOTAL_ISSUES = 0; IBM_LOCAL_TOTAL_ISSUES = 0; DELL_TOTAL_ISSUES = 0; DP_TOTAL_ISSUES = 0; CDROM_TOTAL_ISSUES = 0
