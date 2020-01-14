@@ -1,5 +1,5 @@
 # Nagios
-Monitoring script for checking vSphere ESXi multipathing on multiple disk arrays (EMC, HITACHI, XTREMIO, IBM, DELL) Dell Local Disks and CD-ROM, based on the following path policies:
+Monitoring script for checking vSphere ESXi multipathing on multiple disk arrays (EMC, HITACHI, XTREMIO, IBM, DELL), Dell Local Disks (including VRTX shared disks) and CD-ROM, based on the following path policies:
 
 #DGC = VMW_SATP_CX = VMW_PSP_MRU
 
