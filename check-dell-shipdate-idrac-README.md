@@ -64,7 +64,7 @@ client_id='xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 client_secret='yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy'
 
 ## Usage
-    ./check-dell-shipdate-idrac.sh -H|--hostname HOSTNAME -w|--warning <number of days> -c|--critical <number of days> -T|--type <server|chassis|switch> -C|--community 'SNMP_COMMUNITY_STRING'
+    ./check-dell-shipdate-idrac.sh -H|--hostname HOSTNAME -T|--type <server|chassis|switch> -C|--community 'SNMP_COMMUNITY_STRING'
     
 Usage:
 
@@ -72,10 +72,6 @@ check-dell-shipdate-idrac.sh [options]
 
 -H|--hostname HOSTNAME to pull SNMP 
 
--w|--warning <number of days>
-	
--c|--critical <number of days>
-	
 -T|--type <server|chassis|switch>
 
 -C|--community 'SNMP_COMMUNITY_STRING'
