@@ -6,8 +6,8 @@
 ### package=net-snmp for openSUSE: sudo zypper in net-snmp
 ### package=snmp for Ubuntu:       sudo apt-get install snmp
 
-REVISION="Revision 1.0"
-REVDATE="01-06-2020"
+REVISION="Revision 1.1"
+REVDATE="01-05-2020"
 AUTHOR="bridrod - You might even script, but only Love builds! :)"
 PURPOSE="Checks Ship Date for Dell devices using Dell API/SDK v5, which requires OAuthTLS2.0 for authorization"
 LICENSE="Distributed under GNU General Public License (GPL) v3.0 - http://www.fsf.org/licenses/gpl.txt"
@@ -25,14 +25,14 @@ print_revision() {
 }
 
 print_usage() {
-    echo "Usage: check-dell-shipdate-idrac.sh -H|--hostname HOSTNAME -w|--warning <number of days> -c|--critical <number of days> -T|--type <server|chassis|switch> -C|--community 'SNMP_COMMUNITY_STRING' -V|--verbose"
+    echo "Usage: check-dell-shipdate-idrac.sh -H|--hostname HOSTNAME -T|--type <server|chassis|switch> -C|--community 'SNMP_COMMUNITY_STRING' -V|--verbose"
     echo "Usage: check-dell-shipdate-idrac.sh -h|--help"
     echo "Usage: check-dell-shipdate-idrac.sh -v|--version"
 }
 
 print_example() {
     echo ""
-    echo "# e.g.: ./check-dell-shipdate-idrac.sh -H HOSTNAME -w 90 -c 60 -C 'SNMP_COMMUNITY_STRING'"
+    echo "# e.g.: ./check-dell-shipdate-idrac.sh -H HOSTNAME -C 'SNMP_COMMUNITY_STRING'"
 }
 
 print_help() {
@@ -45,7 +45,7 @@ print_help() {
 }
 
 ### Make sure the correct number of command line arguments have been supplied (each space will count as a parameter)
-if [ $# -lt 10 ]; then
+if [ $# -lt 6 ]; then
         print_usage
         print_example
 		print_revision
@@ -106,23 +106,7 @@ while test -n "$1"; do
                 HOSTNAME=$2
                 shift
                 ;;
-        -w)
-                WARNING=$2
-                shift
-                ;;
-        --warning)
-                WARNING=$2
-                shift
-                ;;
-        -c)
-                CRITICAL=$2
-                shift
-                ;;
-        --critical)
-                CRITICAL=$2
-                shift
-                ;;
-	-T)
+		-T)
                 TYPE=$2
                 shift
                 ;;
@@ -156,7 +140,7 @@ while test -n "$1"; do
         shift
 done
 
-iDRACHOSTNAME="idrac-$HOSTNAME"
+iDRACHOSTNAME="d-$HOSTNAME"
 
 if [ "$TYPE" == "server" ]; then
 	STAG=`snmpget -v2c -c $COMMUNITY -m '' -M '' -On -OQ -Oe -Ot $HOSTNAME '.1.3.6.1.2.1.47.1.1.1.1.11.1' | sed 's/^[^=]*=//' | sed 's/"//g' | sed '/^$/d' | sed -e 's/^[ \t]*//' | sed '/^[[:space:]]*$/d' | sed 's/\s*$//g'`
@@ -262,8 +246,9 @@ if [ "$TYPE" == "switch" ]; then
 	fi	
 fi
 
-client_id='xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-client_secret='yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy'
+APIKEY='fedb7a8a-d8c0-4691-9879-376089ba74a0'
+client_id='l7b1a872c85dac400bb5b3a49ccfe06d06'
+client_secret='b14b954b72594a66aff5cc31cb5c0027'
 grant_type='client_credentials'
 url_token='https://apigtwb2c.us.dell.com/auth/oauth/v2/token'
 url_warranty1='https://apigtwb2c.us.dell.com/PROD/sbil/eapi/v5/asset-entitlements/'
