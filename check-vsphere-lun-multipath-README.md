@@ -27,14 +27,14 @@ It might work with other disk arrays too. So, feel free to modify it to fit your
 ## How it works
 It uses ESXCLI from VMware vSphere Perl SDK, to pull information related to disks found and check multipath policy set.
 
-If a CRITICAL alert is given, you will need to investigate the multipath setting coming from the host/array reporting the issue. Remember, multipathing is done per datastore, per host. So, once you know the array and the host in question, then it will be easier to pinpoint the datastore with wrong multipathing.
+If a CRITICAL alert is given, you will need to investigate the multipath setting coming from the host/array reporting the issue. Remember, multipathing is done per datastore, per host. So, once you know the array and the host in question, then it will be easier to pinpoint the datastore with wrong multipathing policy.
 
 ## Requirements
 VMware vSphere Perl SDK. Tested with v5.5.0 through v6.7.0;
 
 **Note:** This is a linux script tested under openSUSE and Ubuntu distros
 
-Requires **grep**, **awk**, **tail**, **cut** and **sed**:
+Requires **grep**, **awk**, **tail**, **cut** and **sed**
 
 ## Usage
     ./check-vsphere-lun-multipath.sh -H|--hostname -u|--username USERNAME -p|--password PASSWORD
