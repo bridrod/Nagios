@@ -108,16 +108,16 @@ drsBladeCurrStatus=""
 drsTempCurrStatus=""
 drsCMCCurrStatus=""
 
-ChassisTag=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.2.1.1.6.0 -t 45 | awk '{$1=$2="";print}' | tr -d \'\"\.\ \'`
-drsGlobalCurrStatus=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.2.3.1.1.0 -t 45 | awk '{$1=$2="";print}' | tr -d \'\"\.\ \'`
-drsIOMCurrStatus=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.2.3.1.2.0 -t 45 | awk '{$1=$2="";print}' | tr -d \'\"\.\ \'`
-drsKVMCurrStatus=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.2.3.1.3.0 -t 45 | awk '{$1=$2="";print}' | tr -d \'\"\.\ \'`
-drsRedCurrStatus=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.2.3.1.4.0 -t 45 | awk '{$1=$2="";print}' | tr -d \'\"\.\ \'`
-drsPowerCurrStatus=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.2.3.1.5.0 -t 45 | awk '{$1=$2="";print}' | tr -d \'\"\.\ \'`
-drsFanCurrStatus=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.2.3.1.6.0 -t 45 | awk '{$1=$2="";print}' | tr -d \'\"\.\ \'`
-drsBladeCurrStatus=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.2.3.1.7.0 -t 45 | awk '{$1=$2="";print}' | tr -d \'\"\.\ \'`
-drsTempCurrStatus=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.2.3.1.8.0 -t 45 | awk '{$1=$2="";print}' | tr -d \'\"\.\ \'`
-drsCMCCurrStatus=`snmpget -v2c -c 'B3rt-n-3rni3' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.2.3.1.9.0 -t 45 | awk '{$1=$2="";print}' | tr -d \'\"\.\ \'`
+ChassisTag=`snmpget -v2c -c '$COMMUNITY' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.2.1.1.6.0 -t 45 | awk '{$1=$2="";print}' | tr -d \'\"\.\ \'`
+drsGlobalCurrStatus=`snmpget -v2c -c '$COMMUNITY' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.2.3.1.1.0 -t 45 | awk '{$1=$2="";print}' | tr -d \'\"\.\ \'`
+drsIOMCurrStatus=`snmpget -v2c -c '$COMMUNITY' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.2.3.1.2.0 -t 45 | awk '{$1=$2="";print}' | tr -d \'\"\.\ \'`
+drsKVMCurrStatus=`snmpget -v2c -c '$COMMUNITY' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.2.3.1.3.0 -t 45 | awk '{$1=$2="";print}' | tr -d \'\"\.\ \'`
+drsRedCurrStatus=`snmpget -v2c -c '$COMMUNITY' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.2.3.1.4.0 -t 45 | awk '{$1=$2="";print}' | tr -d \'\"\.\ \'`
+drsPowerCurrStatus=`snmpget -v2c -c '$COMMUNITY' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.2.3.1.5.0 -t 45 | awk '{$1=$2="";print}' | tr -d \'\"\.\ \'`
+drsFanCurrStatus=`snmpget -v2c -c '$COMMUNITY' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.2.3.1.6.0 -t 45 | awk '{$1=$2="";print}' | tr -d \'\"\.\ \'`
+drsBladeCurrStatus=`snmpget -v2c -c '$COMMUNITY' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.2.3.1.7.0 -t 45 | awk '{$1=$2="";print}' | tr -d \'\"\.\ \'`
+drsTempCurrStatus=`snmpget -v2c -c '$COMMUNITY' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.2.3.1.8.0 -t 45 | awk '{$1=$2="";print}' | tr -d \'\"\.\ \'`
+drsCMCCurrStatus=`snmpget -v2c -c '$COMMUNITY' -m '' -M '' -On -Ob -OQ $HOSTNAME .1.3.6.1.4.1.674.10892.2.3.1.9.0 -t 45 | awk '{$1=$2="";print}' | tr -d \'\"\.\ \'`
 
 let TOTAL_ISSUES=0
 if [ "$drsIOMCurrStatus" != "3" ]; then
